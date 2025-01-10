@@ -8,7 +8,6 @@ public class Person {
     protected String street;
     protected String plz;
     protected String city;
-    protected String phoneNumberPrivate;
     protected String phoneNumberMobile;
     protected String email;
     protected LocalDate birthDate;
@@ -17,13 +16,12 @@ public class Person {
     }
 
     public Person(String firstName, String lastName, String street, String plz, String city,
-                  String phoneNumberPrivate, String phoneNumberMobile, String email, LocalDate birthDate) {
+                  String phoneNumberMobile, String email, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
         this.plz = plz;
         this.city = city;
-        this.phoneNumberPrivate = phoneNumberPrivate;
         this.phoneNumberMobile = phoneNumberMobile;
         this.email = email;
         this.birthDate = birthDate;
@@ -67,14 +65,6 @@ public class Person {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getPhoneNumberPrivate() {
-        return phoneNumberPrivate;
-    }
-
-    public void setPhoneNumberPrivate(String phoneNumberPrivate) {
-        this.phoneNumberPrivate = phoneNumberPrivate;
     }
 
     public String getPhoneNumberMobile() {

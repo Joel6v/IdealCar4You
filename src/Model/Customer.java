@@ -8,8 +8,8 @@ public class Customer extends Person {
     public Customer(){}
 
     public Customer(String firstName, String lastName, String street, String plz,
-                    String city, String phoneNumberPrivate, String phoneNumberMobile, String email, LocalDate birthDate, LocalDate createdAt) {
-        super(firstName, lastName, street, plz, city, phoneNumberPrivate, phoneNumberMobile, email, birthDate);
+                    String city, String phoneNumberMobile, String email, LocalDate birthDate, LocalDate createdAt) {
+        super(firstName, lastName, street, plz, city, phoneNumberMobile, email, birthDate);
         this.createdAt = createdAt;
     }
 

@@ -9,7 +9,7 @@ public class User extends Person{
 
     public User(String firstName, String lastName, String street, String plz, String city, String phoneNumberPrivate,
                 String phoneNumberMobile, String email, LocalDate birthDate, Role role) {
-        super(firstName, lastName, street, plz, city, phoneNumberPrivate, phoneNumberMobile, email, birthDate);
+        super(firstName, lastName, street, plz, city, phoneNumberMobile, email, birthDate);
         this.role = role;
     }
 
