@@ -1,62 +1,107 @@
 package Model;
 
+import Persistence.PersistenceService;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarDealerModel {
-    private List<Vehicle> vehicles = new ArrayList<>();
-    private List<Customer> customer = new ArrayList<>();
-    private List<User> users = new ArrayList<>();
+    private List<Vehicle> vehiclesList ;
+    private List<Customer> customerList;
+    private List<User> usersList;
+    PersistenceService persistenceService;
 
     public CarDealerModel() {
-
+        this.persistenceService = new PersistenceService();
+        vehiclesList = (ArrayList<Vehicle>) persistenceService.readObjectList(new Vehicle());
+        customerList = (ArrayList<Customer>) persistenceService.readObjectList(new Customer());
+        usersList = (ArrayList<User>) persistenceService.readObjectList(new User());
     }
 
-    public List<Vehicle> getVehicles() {
-        return vehicles;
+    //Vehicle
+    public Vehicle getVehicle(int index) {
+        return vehiclesList.get(index);
+    }
+
+    public List<Vehicle> getVehicle() {
+        return vehiclesList;
     }
 
     public void addVehicle(Vehicle vehicle) {
-        this.vehicles.add(vehicle);
+        this.vehiclesList.add(vehicle);
+        persistenceService.saveObjectList(vehiclesList);
+    }
+
+    public void addVehicle(List<Vehicle> vehicles) {
+        this.vehiclesList.addAll(vehicles);
+        persistenceService.saveObjectList(vehiclesList);
     }
 
     public void updateVehicle(int index, Vehicle vehicle) {
-        this.vehicles.set(index, vehicle);
+        this.vehiclesList.set(index, vehicle);
+        persistenceService.saveObjectList(vehiclesList);
     }
 
     public void deleteVehicle(int index) {
-        this.vehicles.remove(index);
+        this.vehiclesList.remove(index);
+        persistenceService.saveObjectList(vehiclesList);
     }
 
-    public List<Customer> getCustomer() {
-        return customer;
+    //Customer
+    public Customer getCustomer(int index) {
+        return customerList.get(index);
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
     }
 
     public void addCustomer(Customer customer) {
-        this.customer.add(customer);
+        this.customerList.add(customer);
+        persistenceService.saveObjectList(customerList);
+    }
+
+    public void addCustomer(List<Customer> customers) {
+        this.customerList.addAll(customers);
+        persistenceService.saveObjectList(customerList);
     }
 
     public void updateCustomer(int index, Customer customer) {
-        this.customer.set(index, customer);
+        this.customerList.set(index, customer);
+        persistenceService.saveObjectList(customerList);
     }
 
     public void deleteCustomer(int index) {
-        this.customer.remove(index);
+        this.customerList.remove(index);
+        persistenceService.saveObjectList(customerList);
     }
 
-    public List<User> getUsers() {
-        return users;
+    //User
+    public User getUser(int index) {
+        return usersList.get(index);
+    }
+
+    public List<User> getUsersList() {
+        return usersList;
     }
 
     public void addUser(User user) {
-        this.users.add(user);
+        this.usersList.add(user);
+        persistenceService.saveObjectList(usersList);
+    }
+
+    public void addUser(List<User> users) {
+        this.usersList.addAll(users);
+        persistenceService.saveObjectList(usersList);
     }
 
     public void updateUser(int index, User user) {
-        this.users.set(index, user);
+        this.usersList.set(index, user);
+        persistenceService.saveObjectList(usersList);
     }
 
     public void deleteUser(int index) {
-        this.users.remove(index);
+        this.usersList.remove(index);
+        persistenceService.saveObjectList(usersList);
     }
 }

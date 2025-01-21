@@ -6,7 +6,7 @@ public enum Fuel {
     DIESEL ("DIESEL"),
     ELECTRIC ("ELECTRIC");
 
-    Fuel(String name){
+    Fuel(String fullName){
 
     }
 

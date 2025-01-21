@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class User extends Person{
     private Role role;
+    private String password;
 
     public User() {}
 
@@ -19,5 +20,9 @@ public class User extends Person{
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean validateLogin(String lastName, String firstName, String password) {
+        return this.lastName.equalsIgnoreCase(lastName) && this.firstName.equalsIgnoreCase(firstName) && this.password.equals(password);
     }
 }

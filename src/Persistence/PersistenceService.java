@@ -10,23 +10,25 @@ import java.util.List;
 
 public class PersistenceService {
     private final String fileNameVehicle = "Vehicles.json";
-    private final String fileNamePerson = "Persons.json";
-    //private final String fileNameCostumer = "Costumer.json";
-    //private final String fileNameUser = "User.json";
+    //private final String fileNamePerson = "Persons.json";
+    private final String fileNameCustomer = "Costumer.json";
+    private final String fileNameUser = "User.json";
     private ObjectMapper mapper;
 
     public PersistenceService() {
         mapper = new ObjectMapper();
     }
 
-    public List<Object> readObjectList(Object objectExample) throws IOException {
+    public Object readObjectList(Object objectExample) {
         List<Object> objectsList = new ArrayList<>();
 
         String currentFileName;
-        if(objectExample instanceof Vehicle){
+        if (objectExample instanceof Vehicle) {
             currentFileName = fileNameVehicle;
-        } else{
-            currentFileName = fileNamePerson;
+        } else if (objectExample instanceof Customer) {
+            currentFileName = fileNameCustomer;
+        } else {
+            currentFileName = fileNameUser;
         }
 
         try {
@@ -34,31 +36,33 @@ public class PersistenceService {
 
             if (jsonFile.exists()) {
                 Object[] objectArray = mapper.readValue(jsonFile, Object[].class);
-                for (Object obj: objectArray) {
+                for (Object obj : objectArray) {
                     objectsList.add(obj);
                 }
             }
-        }
-        catch (IOException e) {
-            throw e;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return objectsList;
     }
 
-    public void saveObjectList(List<Object> objectsList) throws IOException {
+    public void saveObjectList(Object objectsList) {
+
         String currentFileName;
-        if(objectsList instanceof Vehicle){
+        if (objectsList instanceof Vehicle) {
             currentFileName = fileNameVehicle;
-        } else{
-            currentFileName = fileNamePerson;
+        } else if (objectsList instanceof Customer) {
+            currentFileName = fileNameCustomer;
+        } else {
+            currentFileName = fileNameUser;
         }
 
-        try{
+        try {
             File jsonFile = new File(currentFileName);
             mapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, objectsList);
-        }catch(IOException e){
-            throw e;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

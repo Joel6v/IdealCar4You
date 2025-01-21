@@ -25,6 +25,6 @@ public class PersonController {
     }
 
     public Person getPerson(int id) {
-        return null;
+        return personList.get(id);
     }
 }

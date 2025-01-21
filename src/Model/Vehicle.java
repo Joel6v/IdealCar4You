@@ -2,7 +2,7 @@ package Model;
 
 import java.time.LocalDate;
 
-abstract public class Vehicle {
+public class Vehicle {
     protected String brand;
     protected String model;
     protected double displacement;
@@ -10,13 +10,12 @@ abstract public class Vehicle {
     protected int currentKm;
     protected double power;
     protected LocalDate firstRegistration;
-    protected String color;
     protected int emptyWeigth;
 
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String model, double displacement, Fuel fuel, int currentKm, double power, LocalDate firstRegistration, String color, int emptyWeigth) {
+    public Vehicle(String brand, String model, double displacement, Fuel fuel, int currentKm, double power, LocalDate firstRegistration, int emptyWeigth) {
         this.brand = brand;
         this.model = model;
         this.displacement = displacement;
@@ -24,7 +23,6 @@ abstract public class Vehicle {
         this.currentKm = currentKm;
         this.power = power;
         this.firstRegistration = firstRegistration;
-        this.color = color;
         this.emptyWeigth = emptyWeigth;
     }
 
@@ -82,14 +80,6 @@ abstract public class Vehicle {
 
     public void setFirstRegistration(LocalDate firstRegistration) {
         this.firstRegistration = firstRegistration;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public int getEmptyWeigth() {

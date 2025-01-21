@@ -16,15 +16,7 @@
           <text value="Login"/>
         </properties>
       </component>
-      <component id="8b90a" class="javax.swing.JTextField" binding="tfdUserFirstName">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="97682" class="javax.swing.JPasswordField" binding="pfdUser">
+      <component id="97682" class="javax.swing.JPasswordField" binding="txtUserPassword">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -32,7 +24,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="64290" class="javax.swing.JButton" binding="btnUserState">
+      <component id="64290" class="javax.swing.JButton" binding="btnUserLogin">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -40,25 +32,17 @@
           <text value="Login"/>
         </properties>
       </component>
-      <component id="6ef62" class="javax.swing.JTextField" binding="tfdUserLastName">
+      <component id="6ef62" class="javax.swing.JTextField" binding="txtUserLastName">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties/>
       </component>
-      <component id="51bc4" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Vorname"/>
-        </properties>
-      </component>
       <component id="50e30" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Nachname"/>
@@ -70,6 +54,22 @@
         </constraints>
         <properties>
           <text value="Passwort"/>
+        </properties>
+      </component>
+      <component id="8b90a" class="javax.swing.JTextField" binding="txtUserFirstName">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="51bc4" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Vorname"/>
         </properties>
       </component>
     </children>

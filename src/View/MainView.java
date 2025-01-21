@@ -1,5 +1,7 @@
 package View;
 
+import Controller.CarDealerController;
+
 import javax.swing.*;
 
 public class MainView extends JFrame{
@@ -11,17 +13,17 @@ public class MainView extends JFrame{
     private JTextField txtSearchVehicles;
     private JButton btnSearchVehicles;
     private JList lstVehicles;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
+    private JTextField txtBrand;
+    private JTextField txtModel;
+    private JTextField txtDisplacement;
+    private JTextField txtCurrentKm;
+    private JTextField txtPower;
+    private JTextField txtFirstRegistration;
+    private JTextField txtEmptyWeigth;
     private JButton btnNewVehicles;
     private JButton btnSaveVehicles;
     private JButton btnDeleteVehicles;
+    private JTextField txtSearchCostumers;
     private JButton btnSearch;
     private JList lstCostumers;
     private JTextField txtLastName;
@@ -34,4 +36,19 @@ public class MainView extends JFrame{
     private JButton btnNewCostumer;
     private JButton btnSaveCostumer;
     private JButton btnDeleteCostumer;
+    private JComboBox cmbFuel;
+    private JComboBox cmbCarStructure;
+    private JCheckBox cmbCarNavigation;
+    private JComboBox cmbType;
+    private JTextField cmbVanMaxLoad;
+    private JLabel lblVanMaxLoad;
+    private JLabel lblCarNavigation;
+    private JLabel lblCarStructure;
+
+    public MainView(CarDealerController carDealerController){
+        super("CarDealer Manager");
+        setContentPane(mainPanel);
+        pack(); // To render the GUI
+        setVisible(true);
+    }
 }

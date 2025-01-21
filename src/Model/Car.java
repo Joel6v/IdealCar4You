@@ -10,8 +10,8 @@ public class Car extends Vehicle{
     }
 
     public Car(String brand, String model, double displacement, Fuel fuel,
-               int currentKm, double power, LocalDate firstRegistration, String color, int emptyWeigth, Structure structure) {
-        super(brand, model, displacement, fuel, currentKm, power, firstRegistration, color, emptyWeigth);
+               int currentKm, double power, LocalDate firstRegistration, int emptyWeigth, Structure structure) {
+        super(brand, model, displacement, fuel, currentKm, power, firstRegistration, emptyWeigth);
         this.structure = structure;
     }
 
