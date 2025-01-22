@@ -26,6 +26,10 @@ public class Vehicle {
         this.emptyWeigth = emptyWeigth;
     }
 
+    public String toString(){
+        return brand + " " + model + " " + currentKm;
+    }
+
     public String getBrand() {
         return brand;
     }

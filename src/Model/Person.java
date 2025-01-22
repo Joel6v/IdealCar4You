@@ -1,6 +1,9 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.FormatFlagsConversionMismatchException;
 
 public class Person {
     protected String firstName;
@@ -11,6 +14,8 @@ public class Person {
     protected String phoneNumberMobile;
     protected String email;
     protected LocalDate birthDate;
+
+    protected DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public Person(){
     }
@@ -27,6 +32,10 @@ public class Person {
         this.birthDate = birthDate;
     }
 
+    public String toString(){
+        return firstName + " " + lastName + " " + getAge();
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -41,6 +50,25 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAdress(){
+        return street + ", " + plz + " " + city;
+    }
+
+    public void setAdress(String adress) throws Exception {
+        Exception invalidAdressException = new Exception("Invalid adress");
+        int indexComma = adress.indexOf(',');
+        int indexSpace = adress.indexOf(' ');
+        if(adress.length() <= 4){
+            throw invalidAdressException;
+        }else if (indexComma == -1 || indexSpace == -1){
+            throw invalidAdressException;
+        }
+
+        street = adress.substring(0, indexComma);
+        plz = adress.substring(indexComma + 1, indexSpace);
+        city = adress.substring(indexSpace + 1);
     }
 
     public String getStreet() {
@@ -87,7 +115,19 @@ public class Person {
         return birthDate;
     }
 
+    public String getBirthDateString(){
+        return birthDate.format(dateFormat);
+    }
+
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public void setBirthDateString(String birthDateString) throws FormatFlagsConversionMismatchException {
+        birthDate = LocalDate.parse(birthDateString, dateFormat);
+    }
+
+    public int getAge(){
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 }

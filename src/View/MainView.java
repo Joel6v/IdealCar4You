@@ -3,6 +3,9 @@ package View;
 import Controller.CarDealerController;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import java.time.format.DateTimeFormatter;
 
 public class MainView extends JFrame{
     private JPanel mainPanel;
@@ -44,11 +47,44 @@ public class MainView extends JFrame{
     private JLabel lblVanMaxLoad;
     private JLabel lblCarNavigation;
     private JLabel lblCarStructure;
+    private JTextField txtAge;
+
+    private CarDealerController controller;
 
     public MainView(CarDealerController carDealerController){
         super("CarDealer Manager");
         setContentPane(mainPanel);
         pack(); // To render the GUI
         setVisible(true);
+
+        controller = carDealerController;
+
+        tabMenu.addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+
+            }
+        });
+    }
+
+    private void setContentCustomers(int indexUser){
+        txtLastName.setText(controller.getCustomer(indexUser).getLastName());
+        txtFirstName.setText(controller.getCustomer(indexUser).getFirstName());
+        txtAdress.setText(controller.getCustomer(indexUser).getAdress());
+        txtPhoneNumberMobile.setText(controller.getCustomer(indexUser).getPhoneNumberMobile());
+        txtEmail.setText(controller.getCustomer(indexUser).getEmail());
+        txtBirthDate.setText(controller.getCustomer(indexUser).getBirthDateString());
+        txtAge.setText(Integer.toString(controller.getCustomer(indexUser).getAge()));
+
     }
 }

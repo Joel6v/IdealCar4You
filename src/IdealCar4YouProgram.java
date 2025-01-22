@@ -12,7 +12,7 @@ public class IdealCar4YouProgram {
 
         LoginView loginView = new LoginView(controller);
 
-        loginView.setModal(true);
+        //loginView.setModal(true);
         loginView.setVisible(true);
 
         MainView mainView = new MainView(controller);
