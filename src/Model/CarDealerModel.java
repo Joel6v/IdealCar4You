@@ -13,9 +13,9 @@ public class CarDealerModel {
 
     public CarDealerModel() {
         this.persistenceService = new PersistenceService();
-        vehiclesList = (ArrayList<Vehicle>) persistenceService.readObjectList(new Vehicle());
-        customerList = (ArrayList<Customer>) persistenceService.readObjectList(new Customer());
-        usersList = (ArrayList<User>) persistenceService.readObjectList(new User());
+        vehiclesList = persistenceService.readVehicleList();
+        customerList = persistenceService.readCustomerList();
+        usersList = persistenceService.readUserList();
     }
 
     //Vehicle
@@ -52,7 +52,7 @@ public class CarDealerModel {
         return customerList.get(index);
     }
 
-    public List<Customer> getCustomerList() {
+    public List<Customer> getCustomer() {
         return customerList;
     }
 
@@ -81,7 +81,7 @@ public class CarDealerModel {
         return usersList.get(index);
     }
 
-    public List<User> getUsersList() {
+    public List<User> getUser() {
         return usersList;
     }
 

@@ -6,6 +6,7 @@ import Model.User;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class LoginView extends JFrame{
     private JPanel mainPanel;
@@ -15,24 +16,27 @@ public class LoginView extends JFrame{
     private JTextField txtUserLastName;
 
     private CarDealerController carDealerController;
+    private User currentUser;
+    public User getCurrentUser() { return currentUser; }
 
     public LoginView(CarDealerController carDealerController) {
         super("CarDealer Manager Login");
         setContentPane(mainPanel);
         pack(); // To render the GUI
-        setVisible(true);
+        setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 
         this.carDealerController = carDealerController;
 
         btnUserLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                User user = carDealerController.validateLogin(txtUserLastName.getText(), txtUserFirstName.getText(), txtUserPassword.getText());
-                if(user == null){
+                if(!carDealerController.validateLogin(txtUserLastName.getText(), txtUserFirstName.getText(), String.valueOf(txtUserPassword.getPassword()))){
                     infoBox("Die Login Informationen sind ungültig", "Ungültiges Login");
                 }
                 else{
-                    setVisible(false); //you can't see me!
-                    dispose(); //Destroy the JFrame object
+                    MainView view = new MainView(carDealerController);
+                    view.setVisible(true);
+                    setVisible(false);
+                    dispose();
                 }
             }
         } );

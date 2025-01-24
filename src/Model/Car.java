@@ -23,7 +23,7 @@ public class Car extends Vehicle{
         this.structure = structure;
     }
 
-    public boolean isNavigation() {
+    public boolean getNavigation() {
         return navigation;
     }
 

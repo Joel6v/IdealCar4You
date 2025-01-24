@@ -3,6 +3,7 @@ package Model;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.FormatFlagsConversionMismatchException;
 
 public class Person {
@@ -60,13 +61,11 @@ public class Person {
         Exception invalidAdressException = new Exception("Invalid adress");
         int indexComma = adress.indexOf(',');
         int indexSpace = adress.indexOf(' ');
-        if(adress.length() <= 4){
-            throw invalidAdressException;
-        }else if (indexComma == -1 || indexSpace == -1){
+        if (indexComma == -1 || indexSpace == -1){
             throw invalidAdressException;
         }
 
-        street = adress.substring(0, indexComma);
+        street = adress.substring(0, indexComma); //is never null
         plz = adress.substring(indexComma + 1, indexSpace);
         city = adress.substring(indexSpace + 1);
     }
@@ -115,19 +114,23 @@ public class Person {
         return birthDate;
     }
 
-    public String getBirthDateString(){
-        return birthDate.format(dateFormat);
-    }
-
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public void setBirthDateString(String birthDateString) throws FormatFlagsConversionMismatchException {
-        birthDate = LocalDate.parse(birthDateString, dateFormat);
+    public String getBirthDateString(){
+        return LocalDateFormatter.dateToString(birthDate);
+    }
+
+    public void setBirthDateString(String birthDateString) throws DateTimeParseException {
+        birthDate = LocalDateFormatter.stringToDate(birthDateString);
     }
 
     public int getAge(){
         return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    public boolean searchPerson(String lastName, String firstName){
+        return this.lastName.equalsIgnoreCase(lastName) && this.firstName.equalsIgnoreCase(firstName);
     }
 }

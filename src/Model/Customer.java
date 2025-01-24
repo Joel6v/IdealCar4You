@@ -20,4 +20,12 @@ public class Customer extends Person {
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getCreateAtString(){
+        return LocalDateFormatter.dateToString(createdAt);
+    }
+
+    public void setCreateAtString(String createdAt){
+        this.createdAt = LocalDateFormatter.stringToDate(createdAt);
+    }
 }

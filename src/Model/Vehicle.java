@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Vehicle {
     protected String brand;
@@ -86,11 +87,23 @@ public class Vehicle {
         this.firstRegistration = firstRegistration;
     }
 
+    public String getFirstRegistrationString() {
+        return LocalDateFormatter.dateToString(firstRegistration);
+    }
+
+    public void setFirstRegistrationString(String firstRegistration) throws DateTimeParseException {
+        this.firstRegistration = LocalDate.parse(firstRegistration);
+    }
+
     public int getEmptyWeigth() {
         return emptyWeigth;
     }
 
     public void setEmptyWeigth(int emptyWeigth) {
         this.emptyWeigth = emptyWeigth;
+    }
+
+    public boolean searchVehicle(String brand, String model){
+        return this.brand.equalsIgnoreCase(brand) && this.model.equalsIgnoreCase(model);
     }
 }

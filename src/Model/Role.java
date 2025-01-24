@@ -1,15 +1,23 @@
 package Model;
 
+import java.util.Arrays;
+
 public enum Role {
-    VEHICLE_FLEET_MANAGER ("Vehicle Fleet Manager"),
+    ADMIN("Administrator"),
     CUSTOMER_CONSULTANT ("Customer Consultant"),
-    ADMIN("Administrator"),;
+    VEHICLE_FLEET_MANAGER ("Vehicle Fleet Manager");
 
-    Role(String name){
+    private final String fullName;
 
+    Role(String fullName){
+        this.fullName = fullName;
     }
 
     public String toString(){
-        return this.name();
+        return fullName;
+    }
+
+    public static int indexOf(Role role){
+        return Arrays.stream(Role.values()).toList().indexOf(role);
     }
 }

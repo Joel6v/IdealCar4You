@@ -9,9 +9,10 @@ public class User extends Person{
     public User() {}
 
     public User(String firstName, String lastName, String street, String plz, String city, String phoneNumberPrivate,
-                String phoneNumberMobile, String email, LocalDate birthDate, Role role) {
+                String phoneNumberMobile, String email, LocalDate birthDate, Role role, String password) {
         super(firstName, lastName, street, plz, city, phoneNumberMobile, email, birthDate);
         this.role = role;
+        this.password = password;
     }
 
     public Role getRole() {
@@ -20,6 +21,10 @@ public class User extends Person{
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean validateLogin(String lastName, String firstName, String password) {

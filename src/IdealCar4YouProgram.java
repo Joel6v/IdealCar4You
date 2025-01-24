@@ -1,5 +1,6 @@
 import Controller.CarDealerController;
 import Model.CarDealerModel;
+import Model.User;
 import View.*;
 
 public class IdealCar4YouProgram {
@@ -11,10 +12,6 @@ public class IdealCar4YouProgram {
         controller = new CarDealerController(model);
 
         LoginView loginView = new LoginView(controller);
-
-        //loginView.setModal(true);
         loginView.setVisible(true);
-
-        MainView mainView = new MainView(controller);
     }
 }
