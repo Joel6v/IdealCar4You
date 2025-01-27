@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainView extends JFrame{
     private JPanel mainPanel;
@@ -51,6 +52,23 @@ public class MainView extends JFrame{
     private JTextField txtAge;
     private JPanel pnlUsers;
     private JList lstUsers;
+    private JComboBox cmbUserRole;
+    private JPasswordField txtUserPassword;
+    private JTextField txtUserLastName;
+    private JTextField txtUserFirstName;
+    private JTextField txtUserAdress;
+    private JTextField txtUserPhoneNumberMobile;
+    private JTextField txtUserEmail;
+    private JTextField txtUserBirthDate;
+    private JTextField txtUserAge;
+    private JButton btnNewUser;
+    private JButton btnDeleteUser;
+    private JButton btnSaveUser;
+    private JButton btnSearchUsers;
+    private JTextField txtSearchUsers;
+    private JButton btnResetCostumers;
+    private JButton btnResetVehicles;
+    private JButton btnResetUsers;
 
     private CarDealerController controller;
 
@@ -62,9 +80,10 @@ public class MainView extends JFrame{
 
         controller = carDealerController;
 
-        setLists();
+        setLists(controller.getCustomer(), controller.getVehicle(), controller.getUser());
         setPanelCurrentUser();
         setCmbValuesVehicle();
+        setCmbValuesUser();
 
         tabMenu.addChangeListener(new ChangeListener() {
             @Override
@@ -76,13 +95,16 @@ public class MainView extends JFrame{
                         setContentVehicle(0);
                     }break;
                     case 1:{
-                        setContentCustomers(0);
+                        setContentCustomer(0);
+                    }
+                    case 2:{
+                        setContentUser(0);
                     }
                 }
             }
         });
 
-        cmbType.addActionListener(new ActionListener() {
+        cmbType.addActionListener(new ActionListener() { //Vehicle specific
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(cmbType.getSelectedIndex() == 0){
@@ -108,7 +130,7 @@ public class MainView extends JFrame{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(lstCostumers.getSelectedIndex() != -1){
-                    setContentCustomers(lstCostumers.getSelectedIndex());
+                    setContentCustomer(lstCostumers.getSelectedIndex());
                 }
             }
         });
@@ -120,63 +142,129 @@ public class MainView extends JFrame{
                 }
             }
         });
+        lstUsers.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(lstUsers.getSelectedIndex() != -1){
+                    setContentUser(lstUsers.getSelectedIndex());
+                }
+            }
+        });
+
+        searchButtons();
+        crudButtons();
     }
 
     private void searchButtons(){
         btnSearchVehicles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setContentCustomers(controller.searchCustomer(txtSearchCostumers.getText()));
+                lstVehicles.setListData(controller.searchVehicle(txtSearchVehicles.getText()).toArray());
             }
         });
 
-        btnSearchVehicles.addActionListener( new ActionListener() {
+        btnResetVehicles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setContentVehicle(controller.searchVehicle(txtSearchVehicles.getText()));
+                lstVehicles.setListData(controller.getVehicle().toArray());
+
+                txtSearchVehicles.setText("");
+            }
+        });
+
+        btnSearchCostumers.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lstCostumers.setListData(controller.searchCustomer(txtSearchCostumers.getText()).toArray());
+            }
+        });
+
+        btnResetCostumers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lstCostumers.setListData(controller.getCustomer().toArray());
+                txtSearchCostumers.setText("");
+            }
+        });
+
+        btnSearchUsers.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lstUsers.setListData(controller.searchUser(txtSearchUsers.getText()).toArray());
+            }
+        });
+
+        btnResetUsers.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lstUsers.setListData(controller.getUser().toArray());
+                txtSearchUsers.setText("");
             }
         });
     }
 
-    private void setContentCustomers(int indexUser){
-        if(!controller.getCustomer().isEmpty() && indexUser != -1){
-            txtLastName.setText(controller.getCustomer(indexUser).getLastName());
-            txtFirstName.setText(controller.getCustomer(indexUser).getFirstName());
-            txtAdress.setText(controller.getCustomer(indexUser).getAdress());
-            txtPhoneNumberMobile.setText(controller.getCustomer(indexUser).getPhoneNumberMobile());
-            txtEmail.setText(controller.getCustomer(indexUser).getEmail());
-            txtBirthDate.setText(controller.getCustomer(indexUser).getBirthDateString());
-            txtAge.setText(Integer.toString(controller.getCustomer(indexUser).getAge()));
-            txtCreatedAt.setText(controller.getCustomer(indexUser).getCreateAtString());
+    private void crudButtons(){ // The buttons at the bottom of the frame. New, no read, save, delete
+        btnNewCostumer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
+    private void setContentCustomer(int index){
+        if(!controller.getCustomer().isEmpty() && index != -1){
+            txtLastName.setText(controller.getCustomer(index).getLastName());
+            txtFirstName.setText(controller.getCustomer(index).getFirstName());
+            txtAdress.setText(controller.getCustomer(index).getAdress());
+            txtPhoneNumberMobile.setText(controller.getCustomer(index).getPhoneNumberMobile());
+            txtEmail.setText(controller.getCustomer(index).getEmail());
+            txtBirthDate.setText(controller.getCustomer(index).getBirthDateString());
+            txtAge.setText(Integer.toString(controller.getCustomer(index).getAge()));
+            txtCreatedAt.setText(controller.getCustomer(index).getCreateAtString());
         }
     }
 
-    private void setContentVehicle(int vehiclesIndex){
-        if(!controller.getVehicle().isEmpty() && vehiclesIndex != -1){
+    private void setContentUser(int index){
+        if(!controller.getUser().isEmpty() && index != -1){
+            txtUserLastName.setText(controller.getUser(index).getLastName());
+            txtUserFirstName.setText(controller.getUser(index).getFirstName());
+            txtUserAdress.setText(controller.getUser(index).getAdress());
+            txtUserPhoneNumberMobile.setText(controller.getUser(index).getPhoneNumberMobile());
+            txtUserEmail.setText(controller.getUser(index).getEmail());
+            txtUserBirthDate.setText(controller.getUser(index).getBirthDateString());
+            txtUserAge.setText(Integer.toString(controller.getUser(index).getAge()));
+            cmbUserRole.setSelectedIndex(Role.indexOf(controller.getUser(index).getRole()));
+            txtUserPassword.setText("");
+        }
+    }
+
+    private void setContentVehicle(int index){
+        if(!controller.getVehicle().isEmpty() && index != -1){
 
             cmbType.setSelectedIndex(0);
-            txtBrand.setText(controller.getVehicle(vehiclesIndex).getBrand());
-            txtModel.setText(controller.getVehicle(vehiclesIndex).getModel());
-            txtDisplacement.setText(String.valueOf(controller.getVehicle(vehiclesIndex).getDisplacement()));
-            cmbFuel.setSelectedIndex(Fuel.indexOf(controller.getVehicle(vehiclesIndex).getFuel()));
-            txtCurrentKm.setText(String.valueOf(controller.getVehicle(vehiclesIndex).getCurrentKm()));
-            txtPower.setText(String.valueOf(controller.getVehicle(vehiclesIndex).getPower()));
-            txtFirstRegistration.setText(controller.getVehicle(vehiclesIndex).getFirstRegistrationString());
-            txtEmptyWeigth.setText(String.valueOf(controller.getVehicle(vehiclesIndex).getEmptyWeigth()));
+            txtBrand.setText(controller.getVehicle(index).getBrand());
+            txtModel.setText(controller.getVehicle(index).getModel());
+            txtDisplacement.setText(String.valueOf(controller.getVehicle(index).getDisplacement()));
+            cmbFuel.setSelectedIndex(Fuel.indexOf(controller.getVehicle(index).getFuel()));
+            txtCurrentKm.setText(String.valueOf(controller.getVehicle(index).getCurrentKm()));
+            txtPower.setText(String.valueOf(controller.getVehicle(index).getPower()));
+            txtFirstRegistration.setText(controller.getVehicle(index).getFirstRegistrationString());
+            txtEmptyWeigth.setText(String.valueOf(controller.getVehicle(index).getEmptyWeigth()));
 
-            if(controller.getVehicle(vehiclesIndex) instanceof Car){
-                setContentCar(vehiclesIndex);
+            if(controller.getVehicle(index) instanceof Car){
+                setContentCar(index);
             }else{
-                setContentVan(vehiclesIndex);
+                setContentVan(index);
             }
         }
     }
 
-    private void setContentVan(int vehiclesIndex){
+    private void setContentVan(int index){
         setVisibleVan();
 
         cmbType.setSelectedIndex(1);
-        txtVanMaxLoad.setText(String.valueOf(((Van)controller.getVehicle(vehiclesIndex)).getMaxLoad()));
+        txtVanMaxLoad.setText(String.valueOf(((Van)controller.getVehicle(index)).getMaxLoad()));
     }
 
     private void setVisibleVan(){
@@ -189,12 +277,12 @@ public class MainView extends JFrame{
         txtVanMaxLoad.setVisible(true);
     }
 
-    private void setContentCar(int vehiclesIndex){
+    private void setContentCar(int index){
         setVisibleCar();
 
         cmbType.setSelectedIndex(0);
-        cmbCarStructure.setSelectedIndex(Structure.indexOf(((Car)controller.getVehicle(vehiclesIndex)).getStructure()));
-        chkCarNavigation.setSelected(((Car)controller.getVehicle(vehiclesIndex)).getNavigation());
+        cmbCarStructure.setSelectedIndex(Structure.indexOf(((Car)controller.getVehicle(index)).getStructure()));
+        chkCarNavigation.setSelected(((Car)controller.getVehicle(index)).getNavigation());
     }
 
     private void setVisibleCar(){
@@ -237,9 +325,15 @@ public class MainView extends JFrame{
         }
     }
 
-    private void setLists(){
-        lstCostumers.setListData(controller.getCustomer().toArray());
-        lstVehicles.setListData(controller.getVehicle().toArray());
-        //lstUsers.setListData(controller.getUser().toArray());
+    private void setCmbValuesUser(){
+        for(Role role : Role.values()){
+            cmbUserRole.addItem(role);
+        }
+    }
+
+    private void setLists(ArrayList<Customer> customers, ArrayList<Vehicle> vehicles, ArrayList<User> users){
+        lstCostumers.setListData(customers.toArray());
+        lstVehicles.setListData(vehicles.toArray());
+        lstUsers.setListData(users.toArray());
     }
 }

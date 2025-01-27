@@ -28,7 +28,7 @@ public class Vehicle {
     }
 
     public String toString(){
-        return brand + " " + model + " " + currentKm;
+        return brand + " " + model + "; " + currentKm;
     }
 
     public String getBrand() {

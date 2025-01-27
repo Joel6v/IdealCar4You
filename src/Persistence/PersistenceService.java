@@ -90,9 +90,9 @@ public class PersistenceService {
         }
     }
 
-    private List<User> preFabUsers(){
+    private List<User> preFabUsers() {
         List<User> usersList = new ArrayList<>();
-        User admin = new User("A", "Admin", "", "", "", "", "", "",
+        User admin = new User("", "Admin", "", "", "", "", "", "",
                 LocalDate.now(), Role.ADMIN, "Admin123");
         usersList.add(admin);
         return usersList;

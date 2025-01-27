@@ -34,7 +34,7 @@ public class Person {
     }
 
     public String toString(){
-        return firstName + " " + lastName + " " + getAge();
+        return firstName + " " + lastName + "; " + getAge();
     }
 
     public String getFirstName() {

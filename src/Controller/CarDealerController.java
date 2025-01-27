@@ -113,41 +113,72 @@ public class CarDealerController {
         currentUser = null;
     }
 
-    public int searchVehicle(String search) {
-        String brand = search.substring(0, search.indexOf(';'));
-        String model = search.substring(search.indexOf(';') + 1);
+    public ArrayList<Vehicle> searchVehicle(String search) {
+        ArrayList<Vehicle> vehiclesFound = new ArrayList<>();
+
+        String[] para = getParametersFromString(search);
+        if(para == null) {
+            return vehiclesFound;
+        }
+        String brand = para[0];
+        String model = para[1];
+
         for(int i = 0; i < vehiclesList.size(); i++) {
             if(vehiclesList.get(i).searchVehicle(brand, model)) {
-                return i;
+                vehiclesFound.add(vehiclesList.get(i));
             }
         }
 
-        return -1;
+        return vehiclesFound;
     }
 
-    public int searchCustomer(String search) {
-        String lastName = search.substring(0, search.indexOf(';'));
-        String firstName = search.substring(search.indexOf(';') + 1);
+    public ArrayList<Customer> searchCustomer(String search) {
+        ArrayList<Customer> customerFound = new ArrayList<>();
+
+        String[] para = getParametersFromString(search);
+        if(para == null) {
+            return customerFound;
+        }
+        String lastName = para[0];
+        String firstName = para[1];
 
         for(int i = 0; i < customersList.size(); i++) {
             if(customersList.get(i).searchPerson(lastName, firstName)) {
-                return i;
+                customerFound.add(customersList.get(i));
             }
         }
 
-        return -1;
+        return customerFound;
     }
 
-    public int searchUser(String search) {
-        String lastName = search.substring(0, search.indexOf(';'));
-        String firstName = search.substring(search.indexOf(';') + 1);
+    public ArrayList<User> searchUser(String search) {
+        ArrayList<User> userFound = new ArrayList<>();
+
+        String[] para = getParametersFromString(search);
+        if(para == null) {
+            return userFound;
+        }
+        String lastName = para[0];
+        String firstName = para[1];
 
         for(int i = 0; i < usersList.size(); i++) {
             if(usersList.get(i).searchPerson(lastName, firstName)) {
-                return i;
+                userFound.add(usersList.get(i));
             }
         }
 
-        return -1;
+        return userFound;
+    }
+
+    private String[] getParametersFromString(String fullStr){
+        int indexSemicolon = fullStr.indexOf(';');
+        if(indexSemicolon == -1) {
+            return null;
+        }
+        String[] para = new String[2];
+        para[0] = fullStr.substring(0, indexSemicolon);
+        para[1] = fullStr.substring(indexSemicolon + 1);
+
+        return para;
     }
 }
