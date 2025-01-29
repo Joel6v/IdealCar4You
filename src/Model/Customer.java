@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Customer extends Person {
     private LocalDate createdAt;
@@ -11,6 +12,12 @@ public class Customer extends Person {
                     String city, String phoneNumberMobile, String email, LocalDate birthDate, LocalDate createdAt) {
         super(firstName, lastName, street, plz, city, phoneNumberMobile, email, birthDate);
         this.createdAt = createdAt;
+    }
+
+    public Customer(String firstName, String lastName, String address,
+                    String phoneNumberMobile, String email, String birthDate) throws InvalidAddressException {
+        super(firstName, lastName, address, phoneNumberMobile, email, birthDate);
+        createdAt = LocalDate.now();
     }
 
     public LocalDate getCreatedAt() {
@@ -25,7 +32,7 @@ public class Customer extends Person {
         return LocalDateFormatter.dateToString(createdAt);
     }
 
-    public void setCreateAtString(String createdAt){
+    public void setCreateAtString(String createdAt) throws DateTimeParseException {
         this.createdAt = LocalDateFormatter.stringToDate(createdAt);
     }
 }

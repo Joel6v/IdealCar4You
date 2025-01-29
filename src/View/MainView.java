@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class MainView extends JFrame{
@@ -152,7 +153,7 @@ public class MainView extends JFrame{
         });
 
         searchButtons();
-        crudButtons();
+        crudButtonsCustomer();
     }
 
     private void searchButtons(){
@@ -203,11 +204,36 @@ public class MainView extends JFrame{
         });
     }
 
-    private void crudButtons(){ // The buttons at the bottom of the frame. New, no read, save, delete
+    private void crudButtonsCustomer(){ // The buttons at the bottom of the frame. New, no read, save, delete
         btnNewCostumer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controller.setCustomer(new Customer());
+                lstCostumers.setListData(controller.getCustomer().toArray());
+                setContentCustomer(controller.getCustomer().size() -1);
+            }
+        });
+        btnSaveCostumer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    Customer currentCustomer = new Customer(txtFirstName.getText(), txtLastName.getText(), txtAdress.getText(), txtPhoneNumberMobile.getText(), txtEmail.getText(), txtBirthDate.getText());
+                    controller.setCustomer(currentCustomer, lstCostumers.getSelectedIndex());
+                }catch(DateTimeParseException dateTimeParseException){
+                    controller.infoBox("An exception occurred when parsing the date", "Error parsing date");
+                }catch(InvalidAddressException invalidAddressException){
+                    controller.infoBox(invalidAddressException.getMessage(), "Error converting address");
+                }
+            }
+        });
+        btnDeleteCostumer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = lstCostumers.getSelectedIndex();
+                controller.deleteCustomer(index);
+                lstCostumers.setListData(controller.getCustomer().toArray());
+                lstCostumers.setSelectedIndex(index);
+                setContentCustomer(index);
             }
         });
     }
@@ -216,7 +242,7 @@ public class MainView extends JFrame{
         if(!controller.getCustomer().isEmpty() && index != -1){
             txtLastName.setText(controller.getCustomer(index).getLastName());
             txtFirstName.setText(controller.getCustomer(index).getFirstName());
-            txtAdress.setText(controller.getCustomer(index).getAdress());
+            txtAdress.setText(controller.getCustomer(index).getAddress());
             txtPhoneNumberMobile.setText(controller.getCustomer(index).getPhoneNumberMobile());
             txtEmail.setText(controller.getCustomer(index).getEmail());
             txtBirthDate.setText(controller.getCustomer(index).getBirthDateString());
@@ -229,7 +255,7 @@ public class MainView extends JFrame{
         if(!controller.getUser().isEmpty() && index != -1){
             txtUserLastName.setText(controller.getUser(index).getLastName());
             txtUserFirstName.setText(controller.getUser(index).getFirstName());
-            txtUserAdress.setText(controller.getUser(index).getAdress());
+            txtUserAdress.setText(controller.getUser(index).getAddress());
             txtUserPhoneNumberMobile.setText(controller.getUser(index).getPhoneNumberMobile());
             txtUserEmail.setText(controller.getUser(index).getEmail());
             txtUserBirthDate.setText(controller.getUser(index).getBirthDateString());

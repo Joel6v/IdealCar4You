@@ -5,6 +5,7 @@ import Model.Customer;
 import Model.User;
 import Model.Vehicle;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +35,15 @@ public class CarDealerController {
 //        }
 //    }
 
-    public void addVehicle(Vehicle vehicle) {
+    public void setVehicle(Vehicle vehicle) {
         vehiclesList.add(vehicle);
     }
 
-    public void addCustomer(Customer customer) {
+    public void setCustomer(Customer customer) {
         customersList.add(customer);
     }
 
-    public void addUser(User user) {
+    public void setUser(User user) {
         usersList.add(user);
     }
 
@@ -70,16 +71,28 @@ public class CarDealerController {
         return (ArrayList<User>) usersList;
     }
 
-    public void updateVehicle(int index, Vehicle vehicle) {
-        vehiclesList.set(index, vehicle);
+    public void setVehicle(Vehicle vehicle, int index) {
+        if(index < vehiclesList.size()) {
+            vehiclesList.set(index, vehicle);
+        }else{
+            vehiclesList.add(vehicle);
+        }
     }
 
-    public void updateCustomer(int index, Customer customer) {
-        customersList.set(index, customer);
+    public void setCustomer(Customer customer, int index) {
+        if(index < customersList.size()) {
+            customersList.set(index, customer);
+        }else{
+            customersList.add(customer);
+        }
     }
 
-    public void updateUser(int index, User user) {
-        usersList.set(index, user);
+    public void setUser(User user, int index) {
+        if(index < usersList.size()) {
+            usersList.set(index, user);
+        }else{
+            usersList.add(user);
+        }
     }
 
     public void deleteVehicle(int id) {
@@ -180,5 +193,10 @@ public class CarDealerController {
         para[1] = fullStr.substring(indexSemicolon + 1);
 
         return para;
+    }
+
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }

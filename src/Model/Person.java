@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.FormatFlagsConversionMismatchException;
 
 public class Person {
     protected String firstName;
@@ -33,6 +32,16 @@ public class Person {
         this.birthDate = birthDate;
     }
 
+    public Person(String firstName, String lastName, String address,
+                  String phoneNumberMobile, String email, String birthDate) throws InvalidAddressException, DateTimeParseException {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        setAddress(address);
+        this.phoneNumberMobile = phoneNumberMobile;
+        this.email = email;
+        setBirthDateString(birthDate);
+    }
+
     public String toString(){
         return firstName + " " + lastName + "; " + getAge();
     }
@@ -53,21 +62,20 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getAdress(){
+    public String getAddress(){
         return street + ", " + plz + " " + city;
     }
 
-    public void setAdress(String adress) throws Exception {
-        Exception invalidAdressException = new Exception("Invalid adress");
-        int indexComma = adress.indexOf(',');
-        int indexSpace = adress.indexOf(' ');
+    public void setAddress(String address) throws InvalidAddressException {
+        int indexComma = address.indexOf(',');
+        int indexSpace = address.indexOf(' ');
         if (indexComma == -1 || indexSpace == -1){
-            throw invalidAdressException;
+            throw new InvalidAddressException();
         }
 
-        street = adress.substring(0, indexComma); //is never null
-        plz = adress.substring(indexComma + 1, indexSpace);
-        city = adress.substring(indexSpace + 1);
+        street = address.substring(0, indexComma); //is never null
+        plz = address.substring(indexComma + 1, indexSpace);
+        city = address.substring(indexSpace + 1);
     }
 
     public String getStreet() {

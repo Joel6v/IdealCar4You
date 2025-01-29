@@ -30,7 +30,7 @@ public class LoginView extends JFrame{
         btnUserLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!carDealerController.validateLogin(txtUserLastName.getText(), txtUserFirstName.getText(), String.valueOf(txtUserPassword.getPassword()))){
-                    infoBox("Die Login Informationen sind ungültig", "Ungültiges Login");
+                    carDealerController.infoBox("Die Login Informationen sind ungültig", "Ungültiges Login");
                 }
                 else{
                     MainView view = new MainView(carDealerController);
@@ -40,10 +40,5 @@ public class LoginView extends JFrame{
                 }
             }
         } );
-    }
-
-    private static void infoBox(String infoMessage, String titleBar)
-    {
-        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }
