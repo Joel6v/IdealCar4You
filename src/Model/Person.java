@@ -18,6 +18,14 @@ public class Person {
     protected DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public Person(){
+        firstName = "";
+        lastName = "";
+        street = "";
+        plz = "";
+        city = "";
+        phoneNumberMobile = "";
+        email = "";
+        birthDate = null;
     }
 
     public Person(String firstName, String lastName, String street, String plz, String city,
@@ -63,7 +71,11 @@ public class Person {
     }
 
     public String getAddress(){
-        return street + ", " + plz + " " + city;
+        if(street.isEmpty() && plz.isEmpty() && city.isEmpty()){
+            return "";
+        }else {
+            return street + "," + plz + " " + city;
+        }
     }
 
     public void setAddress(String address) throws InvalidAddressException {
@@ -73,7 +85,7 @@ public class Person {
             throw new InvalidAddressException();
         }
 
-        street = address.substring(0, indexComma); //is never null
+        street = address.substring(0, indexComma); //address is never null
         plz = address.substring(indexComma + 1, indexSpace);
         city = address.substring(indexSpace + 1);
     }
@@ -135,7 +147,11 @@ public class Person {
     }
 
     public int getAge(){
-        return Period.between(birthDate, LocalDate.now()).getYears();
+        if(birthDate == null){
+            return -1;
+        }else{
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        }
     }
 
     public boolean searchPerson(String lastName, String firstName){

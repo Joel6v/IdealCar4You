@@ -16,10 +16,18 @@ public class LocalDateFormatter {
     }
 
     public static String dateToString(LocalDate date) {
-        return date.format(formatter);
+        if(date == null) {
+            return "";
+        }else{
+            return date.format(formatter);
+        }
     }
 
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
-        return LocalDate.parse(date, formatter);
+        if (date.equals("")) {
+            return null;
+        }else{
+            return LocalDate.parse(date, formatter);
+        }
     }
 }

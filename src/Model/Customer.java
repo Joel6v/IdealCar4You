@@ -6,7 +6,10 @@ import java.time.format.DateTimeParseException;
 public class Customer extends Person {
     private LocalDate createdAt;
 
-    public Customer(){}
+    public Customer(){
+        super();
+        createdAt = LocalDate.now();
+    }
 
     public Customer(String firstName, String lastName, String street, String plz,
                     String city, String phoneNumberMobile, String email, LocalDate birthDate, LocalDate createdAt) {

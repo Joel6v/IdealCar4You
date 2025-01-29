@@ -70,6 +70,7 @@ public class MainView extends JFrame{
     private JButton btnResetCostumers;
     private JButton btnResetVehicles;
     private JButton btnResetUsers;
+    private JButton btnSaveAll;
 
     private CarDealerController controller;
 
@@ -204,7 +205,7 @@ public class MainView extends JFrame{
         });
     }
 
-    private void crudButtonsCustomer(){ // The buttons at the bottom of the frame. New, no read, save, delete
+    private void crudButtonsCustomer(){ // The buttons at the bottom of the frame and one in the top. New, no read, save, delete
         btnNewCostumer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -234,6 +235,13 @@ public class MainView extends JFrame{
                 lstCostumers.setListData(controller.getCustomer().toArray());
                 lstCostumers.setSelectedIndex(index);
                 setContentCustomer(index);
+            }
+        });
+
+        btnSaveAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.saveAllLists();
             }
         });
     }

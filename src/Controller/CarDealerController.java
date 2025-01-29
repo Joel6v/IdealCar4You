@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDealerController {
-    private List<Vehicle> vehiclesList;
-    private List<Customer> customersList;
-    private List<User> usersList;
+    private ArrayList<Vehicle> vehiclesList;
+    private ArrayList<Customer> customersList;
+    private ArrayList<User> usersList;
     User currentUser;
     CarDealerModel model;
 
     public CarDealerController(CarDealerModel carDealerModel) {
         this.model = carDealerModel;
-        vehiclesList = model.getVehicle();
-        customersList = model.getCustomer();
-        usersList = model.getUser();
+        vehiclesList = (ArrayList<Vehicle>) model.getVehicle();
+        customersList = (ArrayList<Customer>) model.getCustomer();
+        usersList = (ArrayList<User>) model.getUser();
     }
 
 //    public void addItem(Object obj) {
@@ -81,6 +81,7 @@ public class CarDealerController {
 
     public void setCustomer(Customer customer, int index) {
         if(index < customersList.size()) {
+            customer.setCreatedAt(customersList.get(index).getCreatedAt());
             customersList.set(index, customer);
         }else{
             customersList.add(customer);
@@ -198,5 +199,11 @@ public class CarDealerController {
     public static void infoBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void saveAllLists(){
+        model.setCustomer(customersList);
+        model.setVehicle(vehiclesList);
+        model.setUser(usersList);
     }
 }
